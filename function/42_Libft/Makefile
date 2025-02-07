@@ -34,8 +34,7 @@ SRCS1  = ft_isalpha.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
-
-BONUS = ft_lstnew_bonus.c \
+			ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \
 			ft_lstsize_bonus.c \
 			ft_lstlast_bonus.c \
@@ -47,27 +46,22 @@ BONUS = ft_lstnew_bonus.c \
 
 OBJS = $(SRCS1:.c=.o)
 
-OBJS2 = $(BONUS:.c=.o)
-
 NAME = libft.a
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
-
-bonus: $(OBJS2)
-	ar rcs $(NAME) $(OBJS2)
 	
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
-	rm -f $(OBJS) $(OBJS2)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re 

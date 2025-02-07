@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 20:30:38 by aakritah          #+#    #+#             */
-/*   Updated: 2024/11/25 20:30:47 by aakritah         ###   ########.fr       */
+/*   Created: 2024/11/23 20:54:19 by aakritah          #+#    #+#             */
+/*   Updated: 2025/02/08 00:39:15 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin2(char *s1, char *s2)
 {
 	char	*t;
 	int		s;
@@ -20,8 +20,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 
 	if (!s1)
-		return (ft_strdup(s2));
-	s = ft_strlen(s1) + ft_strlen(s2);
+		return (ft_strdup2(s2));
+	s = ft_strlen2(s1) + ft_strlen2(s2);
 	t = malloc(s + 1);
 	if (!t)
 		return (free(s1), s1 = NULL, free(s2), s2 = NULL, NULL);
@@ -38,7 +38,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (free(s1), s1 = NULL, t);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup2(const char *s1)
 {
 	size_t	i;
 	size_t	s;
@@ -46,7 +46,7 @@ char	*ft_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	s = ft_strlen(s1);
+	s = ft_strlen2(s1);
 	t = malloc((s + 1) * 1);
 	if (!t)
 		return (NULL);
@@ -60,14 +60,14 @@ char	*ft_strdup(const char *s1)
 	return (t);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr2(const char *s, int c)
 {
 	size_t	s1;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	s1 = ft_strlen(s);
+	s1 = ft_strlen2(s);
 	i = 0;
 	while (i < s1 + 1)
 	{
@@ -78,7 +78,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen2(const char *s)
 {
 	size_t	i;
 
