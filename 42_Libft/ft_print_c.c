@@ -6,11 +6,11 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:52:44 by aakritah          #+#    #+#             */
-/*   Updated: 2024/11/13 12:29:49 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:00:51 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
 int	ft_print_c(char c, va_list ptr)
 {

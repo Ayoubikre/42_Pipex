@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS1  = ft_isalpha.c \
+SRC  = ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isprint.c \
 			ft_isascii.c \
@@ -43,21 +43,33 @@ SRCS1  = ft_isalpha.c \
 			ft_lstclear_bonus.c \
 			ft_lstiter_bonus.c\
 			ft_lstmap_bonus.c \
+			get_next_line.c\
+			get_next_line_utils.c\
+			ft_printf.c \
+			ft_putchar.c \
+			ft_putnbr.c \
+			ft_putstr.c \
+			ft_print_c.c \
+			ft_print_d.c \
+			ft_print_p.c \
+			ft_print_s.c \
+			ft_print_x.c \
 
-OBJS = $(SRCS1:.c=.o)
+
+OBJ = $(SRC:.c=.o)
 
 NAME = libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 	
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)

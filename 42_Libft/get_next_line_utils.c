@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 20:54:19 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/08 00:39:15 by noctis           ###   ########.fr       */
+/*   Created: 2024/11/25 20:30:38 by aakritah          #+#    #+#             */
+/*   Updated: 2025/02/08 18:53:41 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
 
 char	*ft_strjoin2(char *s1, char *s2)
 {
@@ -21,7 +21,7 @@ char	*ft_strjoin2(char *s1, char *s2)
 
 	if (!s1)
 		return (ft_strdup2(s2));
-	s = ft_strlen2(s1) + ft_strlen2(s2);
+	s = ft_strlen(s1) + ft_strlen(s2);
 	t = malloc(s + 1);
 	if (!t)
 		return (free(s1), s1 = NULL, free(s2), s2 = NULL, NULL);
@@ -46,7 +46,7 @@ char	*ft_strdup2(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	s = ft_strlen2(s1);
+	s = ft_strlen(s1);
 	t = malloc((s + 1) * 1);
 	if (!t)
 		return (NULL);
@@ -67,7 +67,7 @@ char	*ft_strchr2(const char *s, int c)
 
 	if (!s)
 		return (NULL);
-	s1 = ft_strlen2(s);
+	s1 = ft_strlen(s);
 	i = 0;
 	while (i < s1 + 1)
 	{
@@ -76,14 +76,4 @@ char	*ft_strchr2(const char *s, int c)
 		i++;
 	}
 	return (NULL);
-}
-
-size_t	ft_strlen2(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
 }

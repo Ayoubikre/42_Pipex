@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 20:54:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/08 00:38:44 by noctis           ###   ########.fr       */
+/*   Created: 2024/11/25 20:30:31 by aakritah          #+#    #+#             */
+/*   Updated: 2025/02/08 18:53:34 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
 
 char	*ft_fix_str(char *str, int i)
 {
@@ -72,19 +72,19 @@ char	*ft_get_str(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str[1024];
+	static char	*str;
 	char		*line;
 	int			i;
 
 	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
-		return (free(str[fd]), str[fd] = NULL, NULL);
-	str[fd] = ft_get_str(fd, str[fd]);
-	if (!str[fd])
+		return (free(str), str = NULL, NULL);
+	str = ft_get_str(fd, str);
+	if (!str)
 		return (NULL);
-	line = ft_get_line(str[fd], &i);
+	line = ft_get_line(str, &i);
 	if (!line)
-		return (free(str[fd]), str[fd] = NULL, NULL);
-	str[fd] = ft_fix_str(str[fd], i);
+		return (free(str), str = NULL, NULL);
+	str = ft_fix_str(str, i);
 	return (line);
 }

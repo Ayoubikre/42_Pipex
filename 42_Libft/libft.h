@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 13:15:55 by aakritah          #+#    #+#             */
-/*   Updated: 2024/11/04 14:15:11 by aakritah         ###   ########.fr       */
+/*   Created: 2025/02/08 21:43:44 by aakritah          #+#    #+#             */
+/*   Updated: 2025/02/08 21:43:45 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 # define LIBFT_H
 
 # include <limits.h>
+# include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -52,6 +57,7 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_itoa(int n);
+
 typedef struct s_list
 {
 	void			*content;
@@ -68,5 +74,25 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+char				*get_next_line(int fd);
+
+char				*ft_fix_str(char *str, int i);
+char				*ft_get_line(char *str, int *i);
+char				*ft_get_str(int fd, char *str);
+
+char				*ft_strjoin2(char *s1, char *s2);
+char				*ft_strchr2(const char *s, int c);
+char				*ft_strdup2(const char *s1);
+
+int					ft_printf(const char *t, ...);
+int					ft_print_c(char c, va_list ptr);
+int					ft_print_d(char n, va_list ptr);
+int					ft_print_p(va_list ptr);
+int					ft_print_s(va_list ptr);
+int					ft_print_x(char n, va_list ptr);
+void				ft_putchar(char c);
+void				ft_putnbr(int n);
+void				ft_putstr(const char *s);
 
 #endif

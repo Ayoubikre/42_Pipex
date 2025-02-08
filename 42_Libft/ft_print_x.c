@@ -6,11 +6,11 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:53:09 by aakritah          #+#    #+#             */
-/*   Updated: 2024/11/15 15:55:43 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:01:34 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
 static int	ft_putnbrx(unsigned int i, int f)
 {

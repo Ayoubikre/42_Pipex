@@ -6,11 +6,11 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 13:04:49 by aakritah          #+#    #+#             */
-/*   Updated: 2024/11/15 16:07:07 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:02:06 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 static int	ft_check(char n, va_list ptr)
 {

@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_print_p.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 15:05:27 by aakritah          #+#    #+#             */
-/*   Updated: 2024/11/12 15:15:14 by aakritah         ###   ########.fr       */
+/*   Created: 2024/11/09 21:53:00 by aakritah          #+#    #+#             */
+/*   Updated: 2025/02/08 19:01:22 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-void	ft_putnbr(int n)
+static int	ft_putnbrx(unsigned long i)
 {
-	if (n == -2147483648)
+	int	count;
+
+	count = 0;
+	if (i >= 16)
+		count += ft_putnbrx(i / 16);
+	if (10 <= i % 16 && i % 16 <= 15)
 	{
-		ft_putstr("-2147483648");
-		return ;
+		ft_putchar((i % 16) - 10 + 'a');
+		count++;
 	}
-	else if (n < 0)
+	else if (i % 16 <= 9)
 	{
-		ft_putchar('-');
-		n *= -1;
+		ft_putchar((i % 16) + '0');
+		count++;
 	}
-	if (n > 9)
-		ft_putnbr(n / 10);
-	ft_putchar(n % 10 + '0');
+	return (count);
+}
+
+int	ft_print_p(va_list ptr)
+{
+	ft_putstr("0x");
+	return (ft_putnbrx((unsigned long)va_arg(ptr, void *)) + 2);
 }
