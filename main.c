@@ -3,63 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:03:01 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/08 21:49:25 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:20:59 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	leaks(void)
-{
-	system("leaks a");
-}
-
-// void	callexecve(void)
+// void	leaks(void)
 // {
-// 	char *const args[] = {"ls", NULL};
-// 	char *const envp[] = {NULL};
-// 	execve("/bin/ls", args, envp);
-// 	perror("redo");
-// 	exit(EXIT_FAILURE);
+// 	system("leaks a");
+//  atexit(leaks);
 // }
 
-// void	callexecve2(void)
-// {
-// 	char *const args[] = {"ls", "-a", NULL};
-// 	char *const envp[] = {NULL};
-// 	execve("/bin/ls", args, envp);
-// 	exit(EXIT_FAILURE);
-// }
-
-int	main(void)
+int	main(int c, char **t)
 {
-	atexit(leaks);
+	int		fd;
+	int		i;
+	int		j;
+	// int		x;
+	const char	path_t;
+	const char	**path;
+	const char	**cmd;
+	const char	*envp;
 
-	printf("hekj");
-
-	// 	pid_t pid;
-
-	// 	pid = fork();
-	// 	if (pid < 0)
-	// 	{
-	// 		// Fork failed
-	// 		fprintf(stderr, "Fork2 failed.\n");
-	// 		return (1);
-	// 	}
-	// 	else if (pid == 0)
-	// 	{
-	// 		printf("I am the child. But now a new parent. My PID is :%d --- My child's PID is%d\n",
-	// 			getpid(), pid);
-	// 		callexecve();
-	// 	}
-	// 	else if (pid > 1)
-	// 	{
-	// 		printf("I am the parent. My PID is :%d --- My child's PID is %d\n",
-	// 			getpid(), pid);
-	// 		// waitpid(pid, NULL, 0);
-	// 		callexecve2();
-	// 	}
+	if (c == 2)
+	{
+		i = 0;
+		j = 0;
+		// x = 0;
+		path = (const char ** )ft_split("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",':');
+		cmd =(const char ** )f ft_split(t[2], ' ');
+		envp = NULL;
+		if (access(t[1], F_OK) != 0)
+			exit(0);
+		fd = open(t[1], O_RDWR);
+		if (fd < 0)
+			exit(0);
+		while (path[i])
+		{
+			path_t = (const char * )ft_strjoin(path[i], cmd[0]);
+			if (access(path_t, F_OK) == 0)
+			{
+				j = 1;
+				break ;
+			}
+			free(path_t)
+		}
+		if (j == 0)
+		{
+			free(path); // stiil ned to free all the table
+			exit(0);
+		}
+		execve(path_t, cmd, envp);
+	}
+	return (0);
 }
