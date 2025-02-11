@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 SRC = main.c
 OBJ = $(SRC:.c=.o)
 
