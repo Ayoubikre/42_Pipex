@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:46:07 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/12 13:57:38 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:09:14 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,29 +91,39 @@ int	ft_file_check(char *t, int f)
 
 	if (access(t, R_OK) == -1)
 		ft_exit("failed file not found");
-	if (f == 1)
+	if (f == 0)
 	{
-		fd = open(t, O_RDONLY | O_CLOEXEC);
+		fd = open(t, O_RDWR | O_CLOEXEC);
 		if (fd == -1)
 			ft_exit("failed fd");
 		return (fd);
 	}
-	fd = open(t, O_WRONLY | O_CLOEXEC);
+	fd = open(t, O_RDWR | O_CLOEXEC);
 	if (fd == -1)
 		ft_exit("failed fd");
 	return (fd);
 }
 
-void	ft_process(char **ar, char **env, int pip_arr[2])
+void	ft_process(char **ar, char **env, int pip_arr[2], int f)
 {
 	int	fd;
 
-	fd = ft_file_check(ar[1], 1);
-	dup2(fd, STDIN_FILENO);
-	close(fd);
-	// dup2(pip_arr[1], STDOUT_FILENO);
-	// close(pip_arr[1]);
-	ft_execve(ar[2], env);
+	if (f == 0)
+	{
+		fd = ft_file_check(ar[1], f);
+		dup2(fd, STDIN_FILENO);
+		dup2(pip_arr[1], STDOUT_FILENO);
+		close(pip_arr[1]);
+		ft_execve(ar[2], env);
+	}
+	else
+	{
+		fd = ft_file_check(ar[4], f);
+		dup2(fd, STDOUT_FILENO);
+		dup2(pip_arr[0], STDIN_FILENO);
+		close(pip_arr[0]);
+		ft_execve(ar[3], env);
+	}
 }
 
 int	main(int c, char **ar, char **env)
@@ -122,37 +132,27 @@ int	main(int c, char **ar, char **env)
 	pid_t	pid2;
 	int		pip_arr[2];
 
-	// int		i=0;
 	atexit(leaks);
-	if (c != 3)
+	if (c != 5)
 		ft_exit("failed argv count ");
 	else
 	{
-		// if (pipe(pip_arr) == -1)
-		// 	ft_exit("failed pipe");
+		if (pipe(pip_arr) == -1)
+			ft_exit("failed pipe");
 		pid1 = fork();
 		if (pid1 < 0)
-			ft_exit("failed fork");
-		if (pid1 == 0)
-		{
-			ft_process(ar, env, pip_arr);
-		}
-		// pid2 = fork();
-		// if (pid2 < 0)
-		// 	ft_exit("failed");
-		// if (pid2 == 0)
-		// {
-		// 	path = ft_fix_path(env);
-		// }
-		waitpid(pid1, NULL, WNOHANG);
+			ft_exit("failed fork1");
+		else if (pid1 == 0)
+			ft_process(ar, env, pip_arr, 0);
+		pid2 = fork();
+		if (pid2 < 0)
+			ft_exit("failed fork2");
+		else if (pid2 == 0)
+			ft_process(ar, env, pip_arr, 1);
+		// // waitpid(pid1, NULL, WNOHANG);
+		// // waitpid(pid2, NULL, WNOHANG);
 		printf("\n -- done -- \n");
 	}
 }
 
-// ft_printf("\n\n-----------------\n\n");
-// i = 0;
-// while (path[i])
-// {
-// 	ft_printf("--> %s\n", path[i]);
-// 	i++;
-// }
+
