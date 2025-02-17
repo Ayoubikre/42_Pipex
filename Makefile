@@ -2,7 +2,7 @@ CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
 CFLAGS = -Wall -Wextra
 # SRC = main.c
-SRC = t.c
+SRC = main2.c
 OBJ = $(SRC:.c=.o)
 
 libft_DIR = ./42_Libft

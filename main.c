@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:46:07 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/13 10:20:09 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:49:38 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+// #include "main.h"
 
 void	leaks(void)
 {
