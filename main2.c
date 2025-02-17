@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 02:40:49 by noctis            #+#    #+#             */
-/*   Updated: 2025/02/17 17:27:28 by noctis           ###   ########.fr       */
+/*   Updated: 2025/02/17 21:47:50 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ char	*ft_fix_path(char *cmd, char **env)
 		if (ft_strnstr(env[i], "PATH=", ft_strlen(env[i])) != NULL)
 		{
 			f = 1;
-			path = ft_split(env[i] + 5, ':');
 			break ;
 		}
 		i++;
 	}
 	if (f == 0)
 		ft_outils("path not found error", 1);
+	path = ft_split(env[i] + 5, ':');
 	i = 0;
 	while (path[i])
 	{
@@ -108,7 +108,7 @@ int	ft_open(char *t, int f)
 	return (fd);
 }
 
-void	ft_prosses(int t, char **av, char **env, int f)
+void	ft_prosses(int t[2], char **av, char **env, int f)
 {
 	int	fd;
 
@@ -117,10 +117,11 @@ void	ft_prosses(int t, char **av, char **env, int f)
 		fd = ft_open(av[1], f);
 		if (dup2(fd, STDIN_FILENO) == -1)
 			ft_outils("dup2 error", 1);
-		close(fd);
-		if (dup2(t, STDOUT_FILENO) == -1)
+		if (dup2(t[1], STDOUT_FILENO) == -1)
 			ft_outils("dup2 error", 1);
-		close(t);
+		close(t[1]);
+		close(t[0]);
+		close(fd);
 		ft_execve(av[2], env);
 	}
 	else
@@ -128,10 +129,11 @@ void	ft_prosses(int t, char **av, char **env, int f)
 		fd = ft_open(av[4], f);
 		if (dup2(fd, STDOUT_FILENO) == -1)
 			ft_outils("dup2 error", 1);
-		close(fd);
-		if (dup2(t, STDIN_FILENO) == -1)
+		if (dup2(t[0], STDIN_FILENO) == -1)
 			ft_outils("dup2 error", 1);
-		close(t);
+		close(t[1]);
+		close(t[0]);
+		close(fd);
 		ft_execve(av[3], env);
 	}
 }
@@ -149,18 +151,21 @@ int	main(int c, char **av, char **env)
 	pid1 = fork();
 	if (pid1 == 0)
 	{
-		ft_prosses(t[1], av, env, 1);
+		ft_prosses(t, av, env, 1);
 		exit(0);
 	}
 	pid2 = fork();
 	if (pid2 == 0)
 	{
-		ft_prosses(t[0], av, env, 2);
+		ft_prosses(t, av, env, 2);
 		exit(0);
 	}
 	close(t[0]);
 	close(t[1]);
 	waitpid(pid1, NULL, 0);
+	printf("\n\n--done3--\n\n");
 	waitpid(pid2, NULL, 0);
 	printf("\n\n--done--\n\n");
+	return 0;
 }
+
