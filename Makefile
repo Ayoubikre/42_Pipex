@@ -1,21 +1,26 @@
-CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra
-# SRC = main.c
-SRC = main2.c
-# SRC = t.c
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+SRC = ./M/main.c ./M/outils.c
+# BONUS = ./B/main_bonus.c ./B/outils_bonus.c
+
 OBJ = $(SRC:.c=.o)
+# B_OBJ = $(BONUS:.c=.o)
 
 libft_DIR = ./42_Libft
 libft = $(libft_DIR)/libft.a
 
-NAME = a 
+NAME = pipex
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C $(libft_DIR)
 	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME) $(libft)
+
+# bonus: $(B_OBJ)
+# 	make -C $(libft_DIR)
+# 	$(CC) $(CFLAGS) $(B_OBJ) -o $(NAME) $(libft)
 
 %.o: %.c main.h $(libft_DIR)/libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
