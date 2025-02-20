@@ -1,7 +1,8 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 
-SRC = ./M/main.c ./M/outils.c
+SRC = t.c
+# SRC = ./M/main.c ./M/outils.c
 # BONUS = ./B/main_bonus.c ./B/outils_bonus.c
 
 OBJ = $(SRC:.c=.o)
@@ -22,7 +23,7 @@ $(NAME): $(OBJ)
 # 	make -C $(libft_DIR)
 # 	$(CC) $(CFLAGS) $(B_OBJ) -o $(NAME) $(libft)
 
-%.o: %.c main.h $(libft_DIR)/libft.h
+%.o: %.c t.h $(libft_DIR)/libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
