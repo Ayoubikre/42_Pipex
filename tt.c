@@ -1,208 +1,245 @@
-// #include <unistd.h>
-// #include <stdlib.h>
-// #include <fcntl.h>
-// #include <stdio.h>
-// #include <string.h>
-// #include <sys/wait.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+# include "42_Libft/libft.h"
 
-// int main(int argc, char **argv) {
-//     if (argc < 5) {
-//         write(STDERR_FILENO, "Usage: ./pipex file1 cmd1 cmd2 ... cmdN file2\n", 45);
-//         return 1;
-//     }
+#define MAX_ARGS 100
 
-//     int num_cmds = argc - 3;
-//     int **pipes = malloc((num_cmds - 1) * sizeof(int *));
-//     if (pipes == NULL) {
-//         perror("malloc");
-//         return 1;
-//     }
+typedef struct s_pipeline
+{
+	int	num_cmds;
+	int	*fds;
+	int	**pipes;
+	int	i;
+}		t_pipeline;
 
-//     for (int i = 0; i < num_cmds - 1; i++) {
-//         pipes[i] = malloc(2 * sizeof(int));
-//         if (pipes[i] == NULL) {
-//             perror("malloc");
-//             goto cleanup_pipes;
-//         }
-//         if (pipe(pipes[i]) == -1) {
-//             perror("pipe");
-//             goto cleanup_pipes;
-//         }
-//     }
+int	count_commands(int argc)
+{
+	int	result;
 
-//     int fd_in = open(argv[1], O_RDONLY);
-//     if (fd_in == -1) {
-//         perror("open");
-//         goto cleanup_pipes;
-//     }
+	result = argc - 3; // Subtract program name, file1, and file2
+	return (result);
+}
 
-//     int fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-//     if (fd_out == -1) {
-//         perror("open");
-//         goto cleanup_in;
-//     }
+void	ft_free(char **t)
+{
+	int	i;
 
-//     pid_t pid;
-//     for (int i = 0; i < num_cmds; i++) {
-//         pid = fork();
-//         if (pid == -1) {
-//             perror("fork");
-//             goto cleanup_out;
-//         }
-//         if (pid == 0) { // Child process
-//             if (i == 0) {
-//                 dup2(fd_in, STDIN_FILENO);
-//             } else {
-//                 dup2(pipes[i - 1][0], STDIN_FILENO);
-//             }
+	i = 0;
+	while (t[i])
+	{
+		free(t[i]);
+		i++;
+	}
+	free(t);
+	t = NULL;
+}
 
-//             if (i == num_cmds - 1) {
-//                 dup2(fd_out, STDOUT_FILENO);
-//             } else {
-//                 dup2(pipes[i][1], STDOUT_FILENO);
-//             }
+void	ft_exit(char *t)
+{
+	perror(t);
+	exit(1);
+}
 
-//             // Close all pipe ends in child
-//             for (int j = 0; j < num_cmds - 1; j++) {
-//                 close(pipes[j][0]);
-//                 close(pipes[j][1]);
-//             }
+void	leaks(void)
+{
+	char	command[50];
 
-//             close(fd_in);
-//             close(fd_out);
+	sprintf(command, "leaks %d", getpid());
+	system(command);
+}
 
-//             char **cmd_args = parse_command(argv[i + 2]); // Skip file1
-//             execve(find_path(cmd_args[0]), cmd_args, environ);
-//             perror("execve");
-//             exit(1); // This line won't be reached if execve succeeds
-//         }
-//         // Parent process closes pipe ends it won't use further
-//         if (i > 0) close(pipes[i - 1][0]);
-//         if (i < num_cmds - 1) close(pipes[i][1]);
-//     }
+char	**ft_fix_path2(char **env)
+{
+	int	i;
 
-//     // Wait for all children to complete
-//     for (int i = 0; i < num_cmds; i++) {
-//         wait(NULL);
-//     }
+	i = 0;
+	while (env[i] && ft_strnstr(env[i], "PATH=", ft_strlen(env[i])) == NULL)
+		i++;
+	if (!env[i])
+		return (NULL);
+	return (ft_split(env[i] + 5, ':'));
+}
 
-//     // Close file descriptors in parent
-//     close(fd_in);
-//     close(fd_out);
+char	*ft_fix_path(char *cmd, char **env)
+{
+	int		i;
+	char	**t;
+	char	*tmp;
+	char	*path;
 
-//     // Clean up pipes in parent
-//     for (int i = 0; i < num_cmds - 1; i++) {
-//         free(pipes[i]);
-//     }
-//     free(pipes);
-//     return 0;
-
-// cleanup_out:
-//     close(fd_out);
-// cleanup_in:
-//     close(fd_in);
-// cleanup_pipes:
-//     for (int i = 0; i < num_cmds - 1; i++) {
-//         if (pipes[i]) {
-//             free(pipes[i]);
-//         }
-//     }
-//     free(pipes);
-//     return 1;
-// }
+	t = ft_fix_path2(env);
+	if (!t)
+		return (NULL);
+	i = 0;
+	while (t[i])
+	{
+		tmp = ft_strjoin(t[i], "/");
+		if (!tmp)
+			return (ft_free(t), NULL);
+		path = ft_strjoin(tmp, cmd);
+		if (!path)
+			return (ft_free(t), free(tmp), NULL);
+		if (access(path, F_OK) == 0 && access(path, X_OK) == 0)
+			return (ft_free(t), free(tmp), path);
+		free(tmp);
+		free(path);
+		i++;
+	}
+	return (ft_free(t), NULL);
+}
 
 
 
+int	**create_pipes(int num_pipes)
+{
+	int	**pipes;
+	int	i;
 
+	pipes = malloc(num_pipes * sizeof(int *));
+	i = 0;
+	while (pipes && i < num_pipes)
+	{
+		pipes[i] = malloc(2 * sizeof(int));
+		if (!pipes[i] || pipe(pipes[i]) == -1)
+		{
+			while (i-- > 0)
+			{
+				free(pipes[i]);
+			}
+			free(pipes);
+			perror("pipe");
+			return (NULL);
+		}
+		i++;
+	}
+	return (pipes);
+}
 
+void	setup_io(int i, int num_cmds, int **pipes, int *fds)
+{
+	if (i == 0 && fds[0] != -1)
+		dup2(fds[0], STDIN_FILENO);
+	if (i > 0)
+		dup2(pipes[i - 1][0], STDIN_FILENO);
+	if (i == num_cmds - 1 && fds[1] != -1)
+		dup2(fds[1], STDOUT_FILENO);
+	if (i < num_cmds - 1)
+		dup2(pipes[i][1], STDOUT_FILENO);
+}
 
+void	close_pipes(int **pipes, int num_pipes, int *fds)
+{
+	int	i;
 
+	i = 0;
+	while (i < num_pipes)
+	{
+		close(pipes[i][0]);
+		close(pipes[i][1]);
+		i++;
+	}
+	if (fds[0] != -1)
+		close(fds[0]);
+	if (fds[1] != -1)
+		close(fds[1]);
+}
 
+void	execute_child(char *cmd, t_pipeline *data, char **env)
+{
+	char	**args;
 
+	args = ft_split(cmd,' ');
+	close_pipes(data->pipes, data->num_cmds - 1, data->fds);
+	free(data->fds);
+	execve(ft_fix_path(args[0],env),args, env);
+	perror("execve");
+	exit(1);
+}
 
+int	spawn_child(t_pipeline *data, char **argv, char **env)
+{
+	pid_t	pid;
 
+	pid = fork();
+	if (pid == 0)
+	{
+		setup_io(data->i, data->num_cmds, data->pipes, data->fds);
+		execute_child(argv[data->i + 2], data, env);
+	}
+	close_pipes(data->pipes, data->num_cmds - 1, data->fds);
+	free(data->fds);
+	return (pid);
+}
 
+void	process_commands(t_pipeline *data, char **argv, char **env)
+{
+	pid_t	pid;
 
+	data->i = 0;
+	while (data->i < data->num_cmds)
+	{
+		data->fds = malloc(2 * sizeof(int));
+		data->fds[0] = open(argv[1], O_RDONLY);
+		data->fds[1] = open(argv[data->num_cmds + 2],
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		pid = spawn_child(data, argv, env);
+		if (pid == -1)
+		{
+			perror("fork");
+			free(data->fds);
+			return ;
+		}
+		data->i++;
+	}
+}
 
+void	cleanup(t_pipeline *data)
+{
+	int	i;
 
+	i = 0;
+	while (i < data->num_cmds - 1)
+	{
+		close(data->pipes[i][0]);
+		free(data->pipes[i]);
+		i++;
+	}
+	free(data->pipes);
+}
 
+void	wait_children(t_pipeline *data)
+{
+	int		count;
+	pid_t	pid;
 
+	count = 0;
+	while (count < data->num_cmds)
+	{
+		pid = waitpid(-1, NULL, 0);
+		if (pid != -1)
+			count++;
+	}
+}
 
+int	main(int argc, char **argv, char **env)
+{
+	t_pipeline	data;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// int main(int argc, char **argv) {
-
-//     pid_t pid;
-//     for (int i = 0; i < num_cmds; i++) {
-//         pid = fork();
-//         if (pid == -1) {
-//             perror("fork");
-//             exit(1);
-//         }
-//         if (pid == 0) { // Child process
-//             // Input redirection
-//             if (i == 0) {
-//                 dup2(fd_in, STDIN_FILENO);
-//             } else {
-//                 dup2(pipes[i - 1][0], STDIN_FILENO);
-//             }
-
-//             // Output redirection
-//             if (i == num_cmds - 1) {
-//                 dup2(fd_out, STDOUT_FILENO);
-//             } else {
-//                 dup2(pipes[i][1], STDOUT_FILENO);
-//             }
-
-//             // Close all pipe ends in child
-//             for (int j = 0; j < num_cmds - 1; j++) {
-//                 close(pipes[j][0]);
-//                 close(pipes[j][1]);
-//             }
-
-//             close(fd_in);
-//             close(fd_out);
-
-//             // Parse command and execute
-//             char **cmd_args = parse_command(argv[i + 2]); // Skip file1
-//             execve(find_path(cmd_args[0]), cmd_args, environ);
-//             perror("execve");
-//             exit(1);
-//         }
-//         // Parent process closes pipe ends it won't use further
-//         if (i > 0) close(pipes[i - 1][0]); // Close read end of previous pipe
-//         if (i < num_cmds - 1) close(pipes[i][1]); // Close write end of current pipe
-//     }
-
-//     // Close remaining pipe ends in parent
-//     for (int i = 0; i < num_cmds - 1; i++) {
-//         close(pipes[i][0]);
-//         free(pipes[i]);
-//     }
-//     free(pipes);
-
-//     // Wait for all children to complete
-//     for (int i = 0; i < num_cmds; i++) {
-//         wait(NULL);
-//     }
-
-//     close(fd_in);
-//     close(fd_out);
-//     return 0;
-// }
-
-
-// // Implement parse_command and find_path here, similar to before
+	if (argc < 5)
+	{
+		write(STDERR_FILENO, "Usage: ./pipex file1 cmd1 cmd2 ... cmdN file2\n",
+			45);
+		return (1);
+	}
+	data.num_cmds = count_commands(argc);
+	data.pipes = create_pipes(data.num_cmds - 1);
+	if (!data.pipes)
+		return (1);
+	process_commands(&data, argv, env);
+	cleanup(&data);
+	wait_children(&data);
+	return (0);
+}

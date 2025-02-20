@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 02:16:49 by noctis            #+#    #+#             */
-/*   Updated: 2025/02/19 17:41:14 by noctis           ###   ########.fr       */
+/*   Updated: 2025/02/20 22:38:40 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int c, char **ar, char **env)
 		ft_exit("Error: line 21");
 	p = ft_pipe(c);
     ft_prosses(c-3,ar,env,p);
-    
 	return (0);
 }
 
@@ -36,7 +35,10 @@ void	ft_prosses(int c, char **ar, char **env, int **p,)
 		if (pid < 0)
 			ft_exit("Error: line29");
 		else if (pid < 0)
-			ft_prosses(c - 3, ar, env, p fd1, fd2);
+		{
+			ft_connect();
+			execeve();
+		}
 		waitpid(pid, NULL, 0);
 		i++;
 	}
