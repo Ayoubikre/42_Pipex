@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 02:18:42 by noctis            #+#    #+#             */
-/*   Updated: 2025/02/19 02:37:17 by noctis           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:32:29 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@
 
 int main(int c, char **ar, char **env);
 void ft_exit(char *t);
-
+int ft_open(char *t,int f);
 
 #endif
