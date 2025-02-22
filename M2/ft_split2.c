@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:20:06 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/22 21:25:08 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:45:50 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static size_t	ft_count(char const *s, char c)
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] != c && f == 0)
+		if (s[i] == '\'')
+			x=!x;
+		if (s[i] != c && f == 0 && x == 0)
 		{
 			count++;
 			f = 1;
