@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   t.h                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 02:18:42 by noctis            #+#    #+#             */
-/*   Updated: 2025/02/20 22:07:50 by noctis           ###   ########.fr       */
+/*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
+/*   Updated: 2025/02/22 21:15:56 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_H
-#define T_H
+#ifndef MAIN_H
+# define MAIN_H
 
-# include "./42_Libft/libft.h"
+# include "../42_Libft/libft.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
 //---------
+# include <errno.h>
 # include <stdio.h>
 # include <string.h>
-# include <errno.h>
 
-int main(int c, char **ar, char **env);
-void ft_exit(char *t);
-int ft_open(char *t,int f);
 
+int main();
+char	**ft_split2(char const *s, char c);
+
+// add /bin/ls case split /¡
 #endif

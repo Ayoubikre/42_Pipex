@@ -1,8 +1,10 @@
 CC = cc
-CFLAGS = -Wall -Wextra
+# CFLAGS = -g -fsanitize=address  -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra 
 
-SRC = t.c
-# SRC = ./M/main.c ./M/outils.c
+# SRC = ./M2/main.c ./M2/initialize.c ./M2/process.c ./M2/execve.c ./M2/split2.c
+SRC = ./M2/t.c ./M2/ft_split2.c
 # BONUS = ./B/main_bonus.c ./B/outils_bonus.c
 
 OBJ = $(SRC:.c=.o)
@@ -16,22 +18,22 @@ NAME = pipex
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C $(libft_DIR)
+#	make -C $(libft_DIR)
 	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME) $(libft)
 
 # bonus: $(B_OBJ)
 # 	make -C $(libft_DIR)
 # 	$(CC) $(CFLAGS) $(B_OBJ) -o $(NAME) $(libft)
 
-%.o: %.c t.h $(libft_DIR)/libft.h
+%.o: %.c ./M2/t.h $(libft_DIR)/libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make -C $(libft_DIR) clean
+#	make -C $(libft_DIR) clean
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C $(libft_DIR) fclean
+#	make -C $(libft_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all
