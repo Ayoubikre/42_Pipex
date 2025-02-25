@@ -6,21 +6,38 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:24 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/25 04:08:21 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/25 07:24:29 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
+void ft_read(char **ar, t_list2 *data)
+{
+	char *t;
+	t=get_next_line(0);
+	if(!t)
+		(perror("main Error: line 20"), exit(1));
+	while(ft_strnstr(ar[2],t,ft_strlen(ar[2])) != NULL)
+	{
+		write(data->fd1,t,ft_strlen(t));
+		t=get_next_line(0);
+		if(!t)
+			(perror("main Error: line 26"), exit(1));
+	}
+}
+
 int	main(int c, char **ar, char **env)
 {
+	atexit(leaks);
 	int		i;
 	t_list2	data;
 
-	atexit(leaks);
 	if (c < 5 || !env || !*env)
-		(perror("main Error: line 21"), exit(1));
+		(perror("main Error: line 41"), exit(1));
 	ft_initialize(c, ar, &data);
+	if(data.f==1)
+		ft_read(ar,&data);
 	ft_process(c, ar, env, &data);
 	ft_close(c, &data);
 	i = 0;
@@ -33,6 +50,9 @@ int	main(int c, char **ar, char **env)
 	while (i < c - 3 - 1)
 		free(data.pi[i++]);
 	free(data.pi);
+	if(data.f==1)
+		if (unlink("/tmp/infile.txt") == -1)
+			(perror("main Error: line 41"), exit(1));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:24 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/25 06:53:23 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/25 07:31:40 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int c, char **ar, char **env)
 
 	int (i), (status), last_status = 0;
 	atexit(leaks);
-	if (c != 5 || !env || !*env)
+	if (c < 5 || !env || !*env)
 		(perror("main Error: line 21"), exit(1));
 	ft_initialize(c, ar, &data);
 	ft_process(c, ar, env, &data);
