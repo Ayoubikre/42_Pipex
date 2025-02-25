@@ -1,10 +1,10 @@
 CC = cc
 # CFLAGS = -g -fsanitize=address  -Wall -Wextra -Werror
-# CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra 
+CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra 
 
-# SRC = ./M2/main.c ./M2/initialize.c ./M2/process.c ./M2/execve.c ./M2/split2.c
-SRC = ./M2/t.c ./M2/ft_split2.c
+SRC = ./M2/main.c ./M2/initialize.c ./M2/process.c ./M2/execve.c ./M2/ft_split2.c
+# SRC = ./M2/t.c ./M2/ft_split2.c
 # BONUS = ./B/main_bonus.c ./B/outils_bonus.c
 
 OBJ = $(SRC:.c=.o)
@@ -25,7 +25,7 @@ $(NAME): $(OBJ)
 # 	make -C $(libft_DIR)
 # 	$(CC) $(CFLAGS) $(B_OBJ) -o $(NAME) $(libft)
 
-%.o: %.c ./M2/t.h $(libft_DIR)/libft.h
+%.o: %.c ./M2/main.h $(libft_DIR)/libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

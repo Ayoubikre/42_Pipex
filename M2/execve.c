@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:21:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/22 21:31:32 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/25 00:14:30 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 void	ft_execve(char *t, char **env)
 {
 	char	*pathname;
-	char	**cmd1;
+	char	**cmd;
 	int		i;
 
 	i = 0;
-	cmd1 = ft_split(t, ' ');
-	if (!cmd1)
+	cmd = ft_split(t, ' ');
+	if (!cmd)
 		ft_exit("execve Error: line 23");
 	if (ft_check(cmd[0]) == 0)
-		pathname = ft_path(cmd2[i - 1], env);
+		pathname = ft_path(cmd[0], env);
 	else
 		pathname = ft_strdup(cmd[0]);
 	if (!pathname)
 		ft_exit("execve Error: line 29");
-	execve(pathname, cmd1, env);
+	execve(pathname, cmd, env);
 	ft_exit("execve Error: line 31");
 }
 

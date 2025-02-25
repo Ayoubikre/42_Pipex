@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:24 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/22 21:33:42 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/25 00:40:07 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
  
 int	main(int c, char **ar, char **env)
 {
-	atexit(leaks);
+	// atexit(leaks);
 	int		i;
 	t_list2	data;
 
