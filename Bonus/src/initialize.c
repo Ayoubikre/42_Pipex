@@ -6,11 +6,11 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/22 20:01:06 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/25 04:07:57 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../main.h"
 
 void	ft_initialize(int c, char **ar, t_list2 *data)
 {
@@ -18,7 +18,7 @@ void	ft_initialize(int c, char **ar, t_list2 *data)
 	data->c = c - 3;
 	data->fd1 = ft_open(ar[1], 1);
 	data->fd2 = ft_open(ar[c - 1], 2);
-	data->pi = ft_pipe(c); // we didnt close fds
+	data->pi = ft_pipe(c);
 }
 
 int	ft_open(char *t, int f)
@@ -28,16 +28,16 @@ int	ft_open(char *t, int f)
 	if (f == 1)
 	{
 		if (access(t, F_OK) == -1 || access(t, R_OK) == -1)
-			ft_exit("initialze Error: line 31");
+			(perror("initialze Error: line 31"), exit(1));
 		fd = open(t, O_RDONLY);
 		if (fd == -1)
-			ft_exit("initialze Error: line 34");
+			(perror("initialze Error: line 34"), exit(1));
 	}
 	else
 	{
 		fd = open(t, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
-			ft_exit("initialze Error: line 40");
+			(perror("initialze Error: line 40"), exit(1));
 	}
 	return (fd);
 }
@@ -48,7 +48,7 @@ int	**ft_pipe(int c)
 	s = c - 3 - 1;
 	pi = malloc(sizeof(int *) * s);
 	if (!pi)
-		ft_exit("initialze Error: line 51");
+		(perror("initialze Error: line 51"), exit(1));
 	while (i < s)
 	{
 		pi[i] = malloc(sizeof(int) * 2);
@@ -57,16 +57,28 @@ int	**ft_pipe(int c)
 			while (i-- >= 0)
 				free(pi[i]);
 			free(pi);
-			ft_exit("initialze Error: line 60");
+			(perror("initialze Error: line 460"), exit(1));
 		}
 		if (pipe(pi[i]) == -1)
 		{
 			while (i-- >= 0)
 				free(pi[i]);
 			free(pi);
-			ft_exit("initialze Error: line 67");
+			(perror("initialze Error: line 67"), exit(1));
 		}
 		i++;
 	}
 	return (pi);
+}
+void	ft_free(char **t)
+{
+	size_t	i;
+
+	i = 0;
+	while (t[i])
+	{
+		free(t[i]);
+		i++;
+	}
+	free(t);
 }

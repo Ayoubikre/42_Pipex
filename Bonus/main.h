@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/22 21:34:24 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/25 04:13:48 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_list2
 }		t_list2;
 
 int		main(int c, char **ar, char **env);
-void	ft_exit(char *t);
 void	leaks(void);
+void	ft_free(char **t);
 
 void	ft_initialize(int c, char **ar, t_list2 *data);
 int		ft_open(char *t, int f);
@@ -53,9 +53,9 @@ char	**ft_split2(char const *s, char c);
 
 // add /bin/ls case split /
 
-// ./pipex f/z.txt "/bin/grep hello" "/usr/bin/sort" "/bin/cat" f/s.txt 
+// ./pipex f/z.txt "/bin/grep hello" "/usr/bin/sort" "/bin/cat" f/s.txt
 
-// ./pipex f/z.txt "grep hello" "head -3"  "tail -1" "/bin/cat" f/s.txt    
+// ./pipex f/z.txt "grep hello" "head -3"  "tail -1" "/bin/cat" f/s.txt
 
 // < f/z.txt grep "hello" | /usr/bin/sort  > f/s.txt
 

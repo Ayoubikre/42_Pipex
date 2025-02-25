@@ -1,41 +1,62 @@
-CC = cc
-# CFLAGS = -g -fsanitize=address  -Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra -Werror
-# CFLAGS = -Wall -Wextra 
+# CC = cc
+# # CFLAGS = -g -fsanitize=address  -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 
-SRC = ./M2/main.c ./M2/initialize.c ./M2/process.c ./M2/execve.c ./M2/ft_split2.c
-# SRC = ./M2/t.c ./M2/ft_split2.c
-# BONUS = ./B/main_bonus.c ./B/outils_bonus.c
+# SRC = ./Mandatory/src/main.c ./Mandatory/src/initialize.c ./Mandatory/src/process.c ./Mandatory/src/execve.c ./Mandatory/src/ft_split2.c
+# # SRC = ./Bonus/src/main.c ./Bonus/src/initialize.c ./Bonus/src/process.c ./Bonus/src/execve.c ./Bonus/src/ft_split2.c
 
-OBJ = $(SRC:.c=.o)
-# B_OBJ = $(BONUS:.c=.o)
+# OBJ = $(SRC:.c=.o)
 
-libft_DIR = ./42_Libft
-libft = $(libft_DIR)/libft.a
+# libft_DIR = ./42_Libft
+# libft = $(libft_DIR)/libft.a
 
-NAME = pipex
+# # NAME = ../pipex
+# NAME = pipex
 
-all: $(NAME)
+# all: $(NAME)
 
-$(NAME): $(OBJ)
-#	make -C $(libft_DIR)
-	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME) $(libft)
+# $(NAME): $(OBJ) 
+# #	make -C $(libft_DIR)
+# 	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME) $(libft)
 
-# bonus: $(B_OBJ)
-# 	make -C $(libft_DIR)
-# 	$(CC) $(CFLAGS) $(B_OBJ) -o $(NAME) $(libft)
+# %.o: %.c ./Mandatory/main.h $(libft_DIR)/libft.h
+# 	$(CC) $(CFLAGS) -c $< -o $@
+	
+# # %.o: %.c ./Bonus/main.h $(libft_DIR)/libft.h
+# #	$(CC) $(CFLAGS) -c $< -o $@
 
-%.o: %.c ./M2/main.h $(libft_DIR)/libft.h
-	$(CC) $(CFLAGS) -c $< -o $@
+# clean:
+# #	make -C $(libft_DIR) clean
+# 	rm -f $(OBJ)
+
+# fclean: clean
+# #	make -C $(libft_DIR) fclean
+# 	rm -f $(NAME)
+
+# re: fclean all
+
+# .PHONY: all clean fclean re
+
+
+
+
+all:
+	Make -C ./Bonus clean
+	Make -C ./Mandatory 
+
+bonus:
+	Make -C ./Mandatory clean
+	Make -C ./Bonus
 
 clean:
-#	make -C $(libft_DIR) clean
-	rm -f $(OBJ)
+	Make -C ./Mandatory clean
+	Make -C ./Bonus clean
 
-fclean: clean
-#	make -C $(libft_DIR) fclean
-	rm -f $(NAME)
+fclean:
+	Make -C ./Mandatory fclean
+	Make -C ./Bonus fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
+

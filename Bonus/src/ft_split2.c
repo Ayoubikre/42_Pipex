@@ -6,11 +6,11 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:20:06 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/25 00:12:43 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/25 04:07:59 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../main.h"
 
 static size_t	ft_count(char const *s, char c)
 {
@@ -72,19 +72,6 @@ static char	*ft_copy(const char *s, char c, size_t *i)
 	}
 	t[k] = '\0';
 	return (t);
-}
-
-static void	ft_free(char **t)
-{
-	size_t	i;
-
-	i = 0;
-	while (t[i])
-	{
-		free(t[i]);
-		i++;
-	}
-	free(t);
 }
 
 char	**ft_split2(char const *s, char c)
