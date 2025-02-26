@@ -13,18 +13,18 @@ NAME = ../pipex
 all: $(NAME)
 
 $(NAME): $(OBJ) 
-#	make -C $(libft_DIR)
+	make -C $(libft_DIR)
 	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME) $(libft)
 
 %.o: %.c ./main.h $(libft_DIR)/libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-#	make -C $(libft_DIR) clean
+	make -C $(libft_DIR) clean
 	rm -f $(OBJ)
 
 fclean: clean
-#	make -C $(libft_DIR) fclean
+	make -C $(libft_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all
