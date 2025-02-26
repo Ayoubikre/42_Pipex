@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:17:47 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/25 06:48:03 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/26 07:03:25 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_process(int c, char **ar, char **env, t_list2 *data)
 		i = data->i;
 		pid = fork();
 		if (pid < 0)
-			(unlink(ar[c - 1]), perror("process Error: line 40"), exit(1));
+			(unlink(ar[c - 1]), perror("process Error: line 25"), exit(1));
 		if (pid == 0)
 		{
 			ft_dup(c, data);

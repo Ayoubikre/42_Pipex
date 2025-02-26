@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = ./src/main.c ./src/initialize.c ./src/process.c ./src/execve.c ./src/ft_split2.c
+SRC = ./Mandatory/src/main.c ./Mandatory/src/initialize.c ./Mandatory/src/process.c ./Mandatory/src/execve.c ./Mandatory/src/ft_split2.c
 
 OBJ = $(SRC:.c=.o)
 

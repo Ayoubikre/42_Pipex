@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/25 07:27:03 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/26 07:19:48 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 # define MAIN_H
 
 # include "../42_Libft/libft.h"
-# include <errno.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-
 # include <errno.h>
 # include <stdio.h>
-# include <string.h>
 
 typedef struct s_list2
 {

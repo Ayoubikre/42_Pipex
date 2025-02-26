@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:21:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/25 04:39:58 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/26 07:03:43 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_execve(char *t, char **env)
 	if (!pathname)
 	{
 		ft_free(cmd);
-		(perror("execve Error: line 309"), exit(127));
+		(perror("execve Error: line 30"), exit(127));
 	}
 	execve(pathname, cmd, env);
 	(ft_free(cmd), free(pathname));
-	(perror("execve Error: line 49"), exit(127));
+	(perror("execve Error: line 34"), exit(127));
 }
 
 char	*ft_path(char *cmd, char **env)
@@ -44,10 +44,10 @@ char	*ft_path(char *cmd, char **env)
 	while (env[i] && ft_strnstr(env[i], "PATH=", ft_strlen("PATH=")) == NULL)
 		i++;
 	if (!env[i])
-		(perror("execve Error: line 49"), exit(127));
+		(perror("execve Error: line 47"), exit(127));
 	t = ft_split(env[i] + 5, ':');
 	if (!t)
-		(perror("execve Error: line 52"), exit(1));
+		(perror("execve Error: line 50"), exit(1));
 	i = 0;
 	while (t[i])
 	{

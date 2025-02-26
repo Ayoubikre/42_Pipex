@@ -10,7 +10,7 @@ libft = $(libft_DIR)/libft.a
 
 NAME = ../pipex
 
-all: $(NAME)
+bonus: $(NAME)
 
 $(NAME): $(OBJ) 
 	make -C $(libft_DIR)

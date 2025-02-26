@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/25 06:52:43 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/26 07:03:17 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	**ft_pipe(int c)
 			while (i-- >= 0)
 				free(pi[i]);
 			free(pi);
-			(perror("initialze Error: line 460"), exit(1));
+			(perror("initialze Error: line 60"), exit(1));
 		}
 		if (pipe(pi[i]) == -1)
 		{

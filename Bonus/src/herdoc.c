@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 04:16:10 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/26 05:13:33 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/26 07:36:10 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	ft_read(char **ar, t_list2 *data)
 
 	while (1)
 	{
+		write(1, "heredoc> ", 9);
 		t = get_next_line(0);
 		if (!t)
 			(perror("main Error: line 23"), exit(1));
-		if (ft_strnstr(t, ar[2], ft_strlen(ar[2])) != NULL)
+		if ((ft_strnstr(t, ar[2], ft_strlen(ar[2])) != NULL)
+			&& (ft_strlen(ar[2]) == ft_strlen(t) - 1))
 			break ;
 		write(data->fd1, t, ft_strlen(t));
 		free(t);
