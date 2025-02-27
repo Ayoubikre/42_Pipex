@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:17:47 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/26 07:03:25 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/27 07:21:52 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,26 @@ void	ft_dup(int c, t_list2 *data)
 	int	i;
 
 	i = data->i;
-	if (data->i == 0)
-		dup2(data->fd1, STDIN_FILENO);
+	if (i == 0)
+	{
+		if (dup2(data->fd1, STDIN_FILENO) == -1)
+			(perror("process Error: line 48"), exit(1));
+	}
 	else
-		dup2(data->pi[i - 1][0], STDIN_FILENO);
-	if (data->i == c - 3 - 1)
-		dup2(data->fd2, STDOUT_FILENO);
+	{
+		if (dup2(data->pi[i - 1][0], STDIN_FILENO) == -1)
+			(perror("process Error: line 53"), exit(1));
+	}
+	if (i == c - 3 - 1)
+	{
+		if (dup2(data->fd2, STDOUT_FILENO) == -1)
+			(perror("process Error: line 58"), exit(1));
+	}
 	else
-		dup2(data->pi[i][1], STDOUT_FILENO);
+	{
+		if (dup2(data->pi[i][1], STDOUT_FILENO) == -1)
+			(perror("process Error: line 63"), exit(1));
+	}
 }
 
 void	ft_close(int c, t_list2 *data)

@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:21:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/26 07:03:43 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/27 07:11:28 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_execve(char *t, char **env)
 	}
 	execve(pathname, cmd, env);
 	(ft_free(cmd), free(pathname));
-	(perror("execve Error: line 34"), exit(127));
+	(perror("execve Error: line 34"), exit(126));
 }
 
 char	*ft_path(char *cmd, char **env)

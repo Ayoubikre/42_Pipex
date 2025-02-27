@@ -8,18 +8,25 @@ OBJ = $(SRC:.c=.o)
 libft_DIR = ./42_Libft
 libft = $(libft_DIR)/libft.a
 
+M_check = /tmp/.M_check
+B_check = /tmp/.B_check
+
 NAME = ./pipex
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
+$(NAME): $(OBJ)  $(M_check)
 	make -C $(libft_DIR)
 	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME) $(libft)
 
-bonus: $(NAME) fclean
-	make -C ./bonus
+$(M_check):
+	touch $(M_check)
+	rm -rf $(B_check)
 
-%.o: %.c ./main.h $(libft_DIR)/libft.h
+bonus:
+	make -C ./Bonus
+
+%.o: %.c ./Mandatory/main.h $(libft_DIR)/libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -28,10 +35,12 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C $(libft_DIR) fclean
 	make -C ./bonus fclean
+	make -C $(libft_DIR) fclean
+	rm -f $(M_check)
 	rm -f $(NAME)
+
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

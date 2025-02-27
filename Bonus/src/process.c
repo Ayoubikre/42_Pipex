@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:17:47 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/26 05:56:17 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/27 07:17:42 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_process(int c, char **ar, char **env, t_list2 *data)
 		i = data->i;
 		pid = fork();
 		if (pid < 0)
-			(unlink(ar[c - 1]), perror("process Error: line 1"), exit(1));
+			(unlink(ar[c - 1]), perror("process Error: line 25"), exit(1));
 		if (pid == 0)
 		{
 			ft_dup(data);
@@ -45,14 +45,26 @@ void	ft_dup(t_list2 *data)
 	int	i;
 
 	i = data->i;
-	if (data->i == 0)
-		dup2(data->fd1, STDIN_FILENO);
+	if (i == 0)
+	{
+		if (dup2(data->fd1, STDIN_FILENO) == -1)
+			(perror("process Error: line 51"), exit(1));
+	}
 	else
-		dup2(data->pi[i - 1][0], STDIN_FILENO);
-	if (data->i == data->c - 1)
-		dup2(data->fd2, STDOUT_FILENO);
+	{
+		if (dup2(data->pi[i - 1][0], STDIN_FILENO) == -1)
+			(perror("process Error: line 56"), exit(1));
+	}
+	if (i == data->c - 1)
+	{
+		if (dup2(data->fd2, STDOUT_FILENO) == -1)
+			(perror("process Error: line 61"), exit(1));
+	}
 	else
-		dup2(data->pi[i][1], STDOUT_FILENO);
+	{
+		if (dup2(data->pi[i][1], STDOUT_FILENO) == -1)
+			(perror("process Error: line 66"), exit(1));
+	}
 }
 
 void	ft_close(t_list2 *data)

@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/26 06:11:58 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/27 07:25:13 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_initialize(int c, char **ar, t_list2 *data)
 	if (data->f == 1)
 	{
 		data->c = c - 4;
-		data->fd1 = ft_open("/tmp/infile.txt", 3);
 		data->fd2 = ft_open(ar[c - 1], 3);
+		data->fd1 = ft_open("/tmp/infile.txt", 3);
 		data->pi = ft_pipe(data);
 		ft_read(ar, data);
 		close(data->fd1);
@@ -30,8 +30,8 @@ void	ft_initialize(int c, char **ar, t_list2 *data)
 	else
 	{
 		data->c = c - 3;
-		data->fd1 = ft_open(ar[1], 1);
 		data->fd2 = ft_open(ar[c - 1], 2);
+		data->fd1 = ft_open(ar[1], 1);
 		data->pi = ft_pipe(data);
 	}
 }
@@ -40,12 +40,13 @@ int	ft_open(char *t, int f)
 {
 	int	fd;
 
-	fd = -1;
 	if (f == 1)
 	{
 		if (access(t, F_OK) == -1 || access(t, R_OK) == -1)
-			(perror("initialze Error: line 1"), exit(1));
+			return (ft_open("/dev/null", 4));
 		fd = open(t, O_RDONLY);
+		if (fd == -1)
+			return (ft_open("/dev/null", 4));
 	}
 	else if (f == 2)
 		fd = open(t, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -54,7 +55,7 @@ int	ft_open(char *t, int f)
 	else
 		fd = open(t, O_RDWR);
 	if (fd == -1)
-		(perror("initialze Error: line 4"), exit(1));
+		(perror("initialze Error: line 58"), exit(1));
 	return (fd);
 }
 
@@ -64,7 +65,7 @@ int	**ft_pipe(t_list2 *data)
 	s = data->c - 1;
 	pi = malloc(sizeof(int *) * s);
 	if (!pi)
-		(perror("initialze Error: line 5"), exit(1));
+		(perror("initialze Error: line 68"), exit(1));
 	while (i < s)
 	{
 		pi[i] = malloc(sizeof(int) * 2);
@@ -73,14 +74,14 @@ int	**ft_pipe(t_list2 *data)
 			while (i-- >= 0)
 				free(pi[i]);
 			free(pi);
-			(perror("initialze Error: line 6"), exit(1));
+			(perror("initialze Error: line 77"), exit(1));
 		}
 		if (pipe(pi[i]) == -1)
 		{
 			while (i-- >= 0)
 				free(pi[i]);
 			free(pi);
-			(perror("initialze Error: line 7"), exit(1));
+			(perror("initialze Error: line 84"), exit(1));
 		}
 		i++;
 	}

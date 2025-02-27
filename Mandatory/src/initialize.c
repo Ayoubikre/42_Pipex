@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/26 07:03:17 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/27 07:22:03 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_initialize(int c, char **ar, t_list2 *data)
 {
 	data->i = 0;
 	data->c = c - 3;
-	data->fd1 = ft_open(ar[1], 1);
 	data->fd2 = ft_open(ar[c - 1], 2);
+	data->fd1 = ft_open(ar[1], 1);
 	data->pi = ft_pipe(c);
 }
 
@@ -28,17 +28,17 @@ int	ft_open(char *t, int f)
 	if (f == 1)
 	{
 		if (access(t, F_OK) == -1 || access(t, R_OK) == -1)
-			(perror("initialze Error: line 31"), exit(1));
+			return (ft_open("/dev/null", 3));
 		fd = open(t, O_RDONLY);
 		if (fd == -1)
-			(perror("initialze Error: line 34"), exit(1));
+			return (ft_open("/dev/null", 3));
 	}
-	else
-	{
+	else if (f == 2)
 		fd = open(t, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd == -1)
-			(perror("initialze Error: line 40"), exit(1));
-	}
+	else
+		fd = open(t, O_RDONLY);
+	if (fd == -1)
+		(perror("initialze Error: line 41"), exit(1));
 	return (fd);
 }
 

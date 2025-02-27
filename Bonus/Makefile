@@ -8,13 +8,20 @@ OBJ = $(SRC:.c=.o)
 libft_DIR = ../42_Libft
 libft = $(libft_DIR)/libft.a
 
+M_check = /tmp/.M_check
+B_check = /tmp/.B_check
+
 NAME = ../pipex
 
-bonus: $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ) 
+$(NAME): $(OBJ) $(B_check)
 	make -C $(libft_DIR)
 	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME) $(libft)
+	
+$(B_check):
+	touch $(B_check)
+	rm -rf $(M_check)
 
 %.o: %.c ./main.h $(libft_DIR)/libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -25,7 +32,9 @@ clean:
 
 fclean: clean
 	make -C $(libft_DIR) fclean
+	rm -f $(B_check)
 	rm -f $(NAME)
+
 
 re: fclean all
 
