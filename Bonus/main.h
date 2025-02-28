@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/27 07:13:27 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:40:38 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_process(int c, char **ar, char **env, t_list2 *data);
 void	ft_dup(t_list2 *data);
 void	ft_close(t_list2 *data);
 
-void	ft_execve(char *t, char **env);
+void	ft_execve(char *t, char **env, t_list2 *data);
 char	*ft_path(char *cmd, char **env);
 char	*ft_strjoin3(char *s1, char *s2, char *s3);
 int		ft_check(char *t);
@@ -54,3 +54,22 @@ int		ft_check3(char *t1, char *t2);
 char	**ft_split2(char const *s, char c);
 
 #endif
+
+/*
+
+1/ do things in mandatory
+
+2/ free in hardc :
+	if (ft_check3(t, ar[2]) == 1)
+			{free(t);break ;}
+
+3/ free str in get next line
+	
+	if (str && !str[0])  
+    {
+        free(str);
+        str = NULL;
+    }
+
+
+*/
