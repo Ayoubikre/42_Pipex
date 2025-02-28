@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/28 15:40:38 by noctis           ###   ########.fr       */
+/*   Updated: 2025/02/28 15:48:44 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**ft_split2(char const *s, char c);
 
 /*
 
-1/ do things in mandatory
+1/ do things in mandatory and j = data->c - 1 so change th data structure
 
 2/ free in hardc :
 	if (ft_check3(t, ar[2]) == 1)
