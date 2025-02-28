@@ -31,11 +31,11 @@ bonus:
 
 clean:
 	make -C $(libft_DIR) clean
-	make -C ./bonus clean
+	make -C ./Bonus clean
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C ./bonus fclean
+	make -C ./Bonus fclean
 	make -C $(libft_DIR) fclean
 	rm -f $(M_check)
 	rm -f $(NAME)
