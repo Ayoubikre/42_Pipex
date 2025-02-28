@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/27 07:22:03 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:16:19 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ int	**ft_pipe(int c)
 		pi[i] = malloc(sizeof(int) * 2);
 		if (!pi[i])
 		{
-			while (i-- >= 0)
-				free(pi[i]);
+			while (i >= 0)
+				free(pi[i--]);
 			free(pi);
 			(perror("initialze Error: line 60"), exit(1));
 		}
 		if (pipe(pi[i]) == -1)
 		{
-			while (i-- >= 0)
-				free(pi[i]);
+			while (i >= 0)
+				free(pi[i--]);
 			free(pi);
 			(perror("initialze Error: line 67"), exit(1));
 		}
@@ -73,10 +73,23 @@ int	**ft_pipe(int c)
 
 void	ft_free(char **t)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (t[i])
+	{
+		free(t[i]);
+		i++;
+	}
+	free(t);
+}
+
+void	ft_free2(int **t, int c)
+{
+	int	i;
+
+	i = 0;
+	while (i < c)
 	{
 		free(t[i]);
 		i++;

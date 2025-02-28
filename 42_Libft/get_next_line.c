@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 20:30:31 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/08 18:53:34 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:25:36 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,10 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (free(str), str = NULL, NULL);
 	str = ft_fix_str(str, i);
+	if (str && !str[0])
+	{
+		free(str);
+		str = NULL;
+	}
 	return (line);
 }

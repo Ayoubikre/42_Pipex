@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 04:16:10 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/27 07:17:54 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:24:30 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	ft_read(char **ar, t_list2 *data)
 		if (!t)
 			(perror("main Error: line 24"), exit(1));
 		if (ft_check3(t, ar[2]) == 1)
+		{
+			free(t);
 			break ;
+		}
 		write(data->fd1, t, ft_strlen(t));
 		free(t);
 	}

@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/28 15:48:44 by noctis           ###   ########.fr       */
+/*   Updated: 2025/02/28 16:26:32 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_initialize(int c, char **ar, t_list2 *data);
 int		ft_open(char *t, int f);
 int		**ft_pipe(t_list2 *data);
 void	ft_free(char **t);
+void	ft_free2(int **t, int c);
 
 void	ft_process(int c, char **ar, char **env, t_list2 *data);
 void	ft_dup(t_list2 *data);
@@ -54,22 +55,3 @@ int		ft_check3(char *t1, char *t2);
 char	**ft_split2(char const *s, char c);
 
 #endif
-
-/*
-
-1/ do things in mandatory and j = data->c - 1 so change th data structure
-
-2/ free in hardc :
-	if (ft_check3(t, ar[2]) == 1)
-			{free(t);break ;}
-
-3/ free str in get next line
-	
-	if (str && !str[0])  
-    {
-        free(str);
-        str = NULL;
-    }
-
-
-*/

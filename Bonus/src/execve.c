@@ -3,34 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:21:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/27 07:16:17 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:32:59 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
-void	ft_execve(char *t, char **env)
+void	ft_execve(char *t, char **env, t_list2 *data)
 {
 	char	*pathname;
 	char	**cmd;
 
 	cmd = ft_split2(t, ' ');
 	if (!cmd)
-		(perror("execve Error: line 1"), exit(1));
+		(ft_free2(data->pi, data->c - 1), perror("execve Error: line 1"),
+			exit(1));
 	if (ft_check(cmd[0]) == 0)
 		pathname = ft_path(cmd[0], env);
 	else
 		pathname = ft_strdup(cmd[0]);
 	if (!pathname)
 	{
-		ft_free(cmd);
+		(ft_free(cmd), ft_free2(data->pi, data->c - 1));
 		(perror("execve Error: line 2"), exit(127));
 	}
 	execve(pathname, cmd, env);
-	(ft_free(cmd), free(pathname));
+	(ft_free2(data->pi, data->c - 1), ft_free(cmd), free(pathname));
 	(perror("execve Error: line 3"), exit(126));
 }
 
