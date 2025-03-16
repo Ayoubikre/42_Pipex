@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:24 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/27 07:21:58 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/16 10:10:58 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,7 @@ int	main(int c, char **ar, char **env)
 	free(data.pi);
 	return (0);
 }
+
+// fix this
+	// ➜  41_Pipex git:(master) ✗ ls < f/z1.txt | wc -l >> out
+	// ➜  41_Pipex git:(master) ✗ ./pipex f/z1.txt ls "wc -l" out
