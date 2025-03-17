@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/28 16:26:32 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/17 11:46:44 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list2
 	int	f;
 	int	fd1;
 	int	fd2;
+	int fd_tmp;
 	int	**pi;
 }		t_list2;
 

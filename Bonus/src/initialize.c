@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/28 16:20:56 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/17 11:51:09 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@ void	ft_initialize(int c, char **ar, t_list2 *data)
 	data->i = 0;
 	if (data->f == 1)
 	{
+		// data->c = c - 4;
+		// data->fd2 = ft_open(ar[c - 1], 3);
+		// data->fd1 = ft_open("/tmp/infile.txt", 3);
+		// data->pi = ft_pipe(data);
+		// ft_read(ar, data);
+		// close(data->fd1);
+		// data->fd1 = ft_open("/tmp/infile.txt", 4);
+		// unlink("/tmp/infile.txt");
+		
 		data->c = c - 4;
 		data->fd2 = ft_open(ar[c - 1], 3);
-		data->fd1 = ft_open("/tmp/infile.txt", 3);
+		data->fd1 = ft_open("/tmp/infile.txt",3);
+		data->fd_tmp = dup(data->fd1);
 		data->pi = ft_pipe(data);
-		ft_read(ar, data);
-		close(data->fd1);
-		data->fd1 = ft_open("/tmp/infile.txt", 4);
 		unlink("/tmp/infile.txt");
+		ft_read(ar, data);
+		close(data->fd_tmp);
 	}
 	else
 	{
