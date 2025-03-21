@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/20 06:01:48 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:43:47 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,3 @@ char	**ft_split2(char const *s, char c);
 void	leaks(void);
 
 #endif
-
-/*
-
-4/ leak function
-	atexit(leaks);
-	void	leaks(void)
-	{
-	char	command[50];
-
-	sprintf(command, "leaks %d", getpid());
-	system(command);
-	}
-
-5/exit status function .
-
-6/		printf("\n child [%d] pid is -> %d \n", i + 1, pid);
-	printf("\n parent pid is -> %d \n",getpid());
-
-*/

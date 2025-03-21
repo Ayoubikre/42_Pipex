@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:21:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/28 16:32:59 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:43:14 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_execve(char *t, char **env, t_list2 *data)
 	char	**cmd;
 
 	cmd = ft_split2(t, ' ');
-	if (!cmd)
+	if (!cmd || !*cmd)
 		(ft_free2(data->pi, data->c - 1), perror("execve Error: line 1"),
 			exit(1));
 	if (ft_check(cmd[0]) == 0)
