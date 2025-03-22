@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 04:16:10 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/17 13:20:48 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 23:10:40 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	ft_read(char **ar, t_list2 *data)
 			free(t);
 			break ;
 		}
-		write(data->fd1, t, ft_strlen(t));
+		if (write(data->pi_herdoc[1], t, ft_strlen(t)) == -1)
+			(perror("herdoc Error: line 31"), free(t), exit(1));
 		free(t);
 	}
 }
@@ -36,7 +37,7 @@ int	ft_check2(char *t)
 {
 	if (ft_strnstr(t, "here_doc", ft_strlen("here_doc")) != NULL
 		&& (ft_strlen(t) != ft_strlen("here_doc")))
-		(perror("herdoc Error: line 36"), exit(1));
+		(perror("herdoc Error: line 40"), exit(1));
 	if (ft_strnstr(t, "here_doc", ft_strlen("here_doc")) != NULL
 		&& (ft_strlen(t) == ft_strlen("here_doc")))
 		return (1);

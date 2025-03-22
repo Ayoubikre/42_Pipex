@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:17:47 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 21:44:05 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/22 23:08:51 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,22 @@ void	ft_dup(t_list2 *data)
 	if (i == 0)
 	{
 		if (dup2(data->fd1, STDIN_FILENO) == -1)
-			(perror("process Error: line 48"), exit(1));
+			(perror("process Error: line 52"), exit(1));
 	}
 	else
 	{
 		if (dup2(data->pi[i - 1][0], STDIN_FILENO) == -1)
-			(perror("process Error: line 53"), exit(1));
+			(perror("process Error: line 57"), exit(1));
 	}
 	if (i == data->c - 1)
 	{
 		if (dup2(data->fd2, STDOUT_FILENO) == -1)
-			(perror("process Error: line 58"), exit(1));
+			(perror("process Error: line 62"), exit(1));
 	}
 	else
 	{
 		if (dup2(data->pi[i][1], STDOUT_FILENO) == -1)
-			(perror("process Error: line 63"), exit(1));
+			(perror("process Error: line 67"), exit(1));
 	}
 }
 

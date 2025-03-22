@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:21:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 22:15:39 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/22 23:09:51 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_execve(char *t, char **env, t_list2 *data)
 	cmd = ft_split2(t, ' ');
 	if (!cmd || !*cmd || cmd[0][0] == '.')
 		(ft_free2(data->pi, data->c - 1), ft_free(cmd),
-			perror("execve Error: line 22"), exit(1));
+			perror("execve Error: line 23"), exit(1));
 	if (ft_check(cmd[0]) == 0)
 		pathname = ft_path(cmd[0], env);
 	else
@@ -28,11 +28,11 @@ void	ft_execve(char *t, char **env, t_list2 *data)
 	if (!pathname)
 	{
 		(ft_free(cmd), ft_free2(data->pi, data->c - 1));
-		(perror("execve Error: line 30"), exit(127));
+		(perror("execve Error: line 31"), exit(127));
 	}
 	execve(pathname, cmd, env);
 	(ft_free2(data->pi, data->c - 1), ft_free(cmd), free(pathname));
-	(perror("execve Error: line 34"), exit(126));
+	(perror("execve Error: line 35"), exit(126));
 }
 
 char	*ft_path(char *cmd, char **env)
@@ -45,10 +45,10 @@ char	*ft_path(char *cmd, char **env)
 	while (env[i] && ft_strnstr(env[i], "PATH=", ft_strlen("PATH=")) == NULL)
 		i++;
 	if (!env[i])
-		(perror("execve Error: line 47"), exit(127));
+		(perror("execve Error: line 48"), exit(127));
 	t = ft_split(env[i] + 5, ':');
 	if (!t)
-		(perror("execve Error: line 50"), exit(1));
+		(perror("execve Error: line 51"), exit(1));
 	i = 0;
 	while (t[i])
 	{

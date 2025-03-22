@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 22:16:53 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/22 23:10:59 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,14 @@ void	ft_initialize(int c, char **ar, t_list2 *data)
 	data->i = 0;
 	if (data->f == 1)
 	{
-		// data->c = c - 4;
-		// data->fd2 = ft_open(ar[c - 1], 3);
-		// data->fd1 = ft_open("/tmp/infile.txt", 3);
-		// data->pi = ft_pipe(data);
-		// ft_read(ar, data);
-		// close(data->fd1);
-		// data->fd1 = ft_open("/tmp/infile.txt", 4);
-		// unlink("/tmp/infile.txt");
 		data->c = c - 4;
 		data->fd2 = ft_open(ar[c - 1], 3);
-		data->fd1 = ft_open("/tmp/infile.txt", 3);
-		data->fd_tmp = dup(data->fd1);
-		data->pi = ft_pipe(data);
-		unlink("/tmp/infile.txt");
+		if (pipe(data->pi_herdoc) == -1)
+			(perror("initialze Error: line 24"), exit(1));
 		ft_read(ar, data);
-		close(data->fd_tmp);
+		close(data->pi_herdoc[1]);
+		data->fd1 = data->pi_herdoc[0];
+		data->pi = ft_pipe(data);
 	}
 	else
 	{
@@ -51,10 +43,10 @@ int	ft_open(char *t, int f)
 	if (f == 1)
 	{
 		if (access(t, F_OK) == -1 || access(t, R_OK) == -1)
-			return (perror("initialze Error: line 31"), -1);
+			return (perror("initialze Error: line 46"), -1);
 		fd = open(t, O_RDONLY);
 		if (fd == -1)
-			return (perror("initialze Error: line 34"), -1);
+			return (perror("initialze Error: line 49"), -1);
 	}
 	else if (f == 2)
 		fd = open(t, O_WRONLY | O_CREAT | O_TRUNC, 0644);

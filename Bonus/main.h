@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 21:40:37 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/22 22:57:28 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_list2
 	int	fd2;
 	int	fd_tmp;
 	int	**pi;
+	int	pi_herdoc[2];
 }		t_list2;
 
 int		main(int c, char **ar, char **env);
