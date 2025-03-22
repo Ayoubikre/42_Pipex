@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/20 06:01:39 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/22 15:06:41 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	ft_open(char *t, int f)
 	if (f == 1)
 	{
 		if (access(t, F_OK) == -1 || access(t, R_OK) == -1)
-			return (ft_open("/dev/null", 3));
+			return (perror("initialze Error: line 31"), -1);
 		fd = open(t, O_RDONLY);
 		if (fd == -1)
-			return (ft_open("/dev/null", 3));
+			return (perror("initialze Error: line 34"), -1);
 	}
 	else if (f == 2)
 		fd = open(t, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -96,41 +96,3 @@ void	ft_free2(int **t, int c)
 	}
 	free(t);
 }
-
-
-
-// void	ft_initialize(int c, char **ar, t_list2 *data)
-// {
-// 	data->i = 0;
-// 	data->c = c - 3;
-// 	data->fd2 = ft_open(ar[c - 1], 2,data);
-// 	data->fd1 = ft_open(ar[1], 1,data);
-// 	data->pi = ft_pipe(c);
-// }
-
-// int	ft_open(char *t, int f,t_list2 *data)
-// {
-// 	int	fd;
-
-// 	if (f == 1)
-// 	{
-// 		if (access(t, F_OK) == -1 || access(t, R_OK) == -1)
-// 		{
-// 			data->i++;
-// 			return (ft_open("/dev/null", 3,data)); 
-// 		}
-// 		fd = open(t, O_RDONLY);
-// 		if (fd == -1)
-// 		{
-// 			data->i++;
-// 			return (ft_open("/dev/null", 3,data)); 
-// 		}
-// 	}
-// 	else if (f == 2)
-// 		fd = open(t, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-// 	else
-// 		fd = open(t, O_RDONLY);
-// 	if (fd == -1)
-// 		(perror("initialze Error: line 41"), exit(1));
-// 	return (fd);
-// }

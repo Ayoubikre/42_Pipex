@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:17:47 by aakritah          #+#    #+#             */
-/*   Updated: 2025/02/28 16:22:02 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/22 15:04:01 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	ft_process(int c, char **ar, char **env, t_list2 *data)
 			(unlink(ar[c - 1]), perror("process Error: line 25"), exit(1));
 		if (pid == 0)
 		{
-			ft_dup(data);
-			ft_close(data);
+			if (data->i == 0 && data->fd1 == -1)
+				(ft_close(data), exit(1));
+			(ft_dup(data), ft_close(data));
 			if (data->f == 1)
 				ft_execve(ar[i + 3], env, data);
 			else

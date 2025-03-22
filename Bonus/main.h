@@ -28,7 +28,7 @@ typedef struct s_list2
 	int	f;
 	int	fd1;
 	int	fd2;
-	int fd_tmp;
+	int	fd_tmp;
 	int	**pi;
 }		t_list2;
 

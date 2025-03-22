@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:24 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/21 13:44:38 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 15:07:27 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,37 +34,3 @@ int	main(int c, char **ar, char **env)
 	free(data.pi);
 	return (0);
 }
-
-
-
-/*
-
-4/ leak function
-	atexit(leaks);
-	void	leaks(void)
-	{
-	char	command[50];
-
-	sprintf(command, "leaks %d", getpid());
-	system(command);
-	}
-
-5/exit status function .
-
-6/		printf("\n child [%d] pid is -> %d \n", i + 1, pid);
-	printf("\n parent pid is -> %d \n",getpid());
-
-
-fix this
-	➜  41_Pipex git:(master) ✗ ls < f/z1.txt | wc -l >> out
-	➜  41_Pipex git:(master) ✗ ./pipex f/z1.txt ls "wc -l" out
-
-and this
-	rm -rf herdoc tmpfile , unlik befor or smthing	
-
-	
-	perror infile not found and skip first cmd
-
-	
-
-*/
