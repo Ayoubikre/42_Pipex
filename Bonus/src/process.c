@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:17:47 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 15:04:01 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 21:15:23 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_process(int c, char **ar, char **env, t_list2 *data)
 		if (pid == 0)
 		{
 			if (data->i == 0 && data->fd1 == -1)
-				(ft_close(data), exit(1));
+				(ft_close(c, data), ft_free2(data->pi), exit(1));
 			(ft_dup(data), ft_close(data));
 			if (data->f == 1)
 				ft_execve(ar[i + 3], env, data);
