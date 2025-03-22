@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:27 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/21 13:43:47 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 21:40:30 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int		main(int c, char **ar, char **env);
 
 void	ft_initialize(int c, char **ar, t_list2 *data);
 int		ft_open(char *t, int f);
-int		**ft_pipe(int c);
+int		**ft_pipe(t_list2 *data);
 void	ft_free(char **t);
 void	ft_free2(int **t, int c);
 
 void	ft_process(int c, char **ar, char **env, t_list2 *data);
-void	ft_dup(int c, t_list2 *data);
-void	ft_close(int c, t_list2 *data);
+void	ft_dup(t_list2 *data);
+void	ft_close(t_list2 *data);
 
 void	ft_execve(char *t, char **env, t_list2 *data);
 char	*ft_path(char *cmd, char **env);
@@ -48,6 +48,5 @@ char	*ft_strjoin3(char *s1, char *s2, char *s3);
 int		ft_check(char *t);
 
 char	**ft_split2(char const *s, char c);
-void	leaks(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:24 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 15:07:27 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 21:42:12 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	main(int c, char **ar, char **env)
 	ft_initialize(c, ar, &data);
 	ft_process(c, ar, env, &data);
 	i = 0;
-	while (i < c - 3)
+	while (i < data.c)
 	{
 		wait(NULL);
 		i++;
 	}
-	ft_close(c, &data);
+	ft_close(&data);
 	i = 0;
-	while (i < c - 3 - 1)
+	while (i < data.c - 1)
 		free(data.pi[i++]);
 	free(data.pi);
 	return (0);

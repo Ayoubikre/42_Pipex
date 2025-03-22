@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 15:06:41 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 21:28:06 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_initialize(int c, char **ar, t_list2 *data)
 	data->c = c - 3;
 	data->fd2 = ft_open(ar[c - 1], 2);
 	data->fd1 = ft_open(ar[1], 1);
-	data->pi = ft_pipe(c);
+	data->pi = ft_pipe(data);
 }
 
 int	ft_open(char *t, int f)
@@ -42,10 +42,10 @@ int	ft_open(char *t, int f)
 	return (fd);
 }
 
-int	**ft_pipe(int c)
+int	**ft_pipe(t_list2 *data)
 {
 	int (s), (**pi), i = 0;
-	s = c - 3 - 1;
+	s = data->c - 1;
 	pi = malloc(sizeof(int *) * s);
 	if (!pi)
 		(perror("initialze Error: line 51"), exit(1));
