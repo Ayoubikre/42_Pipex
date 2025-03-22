@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:21:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/21 13:43:37 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:15:39 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_execve(char *t, char **env, t_list2 *data)
 	char	**cmd;
 
 	cmd = ft_split2(t, ' ');
-	if (!cmd || !*cmd)
-		(ft_free2(data->pi, data->c - 1), perror("execve Error: line 22"),
-			exit(1));
+	if (!cmd || !*cmd || cmd[0][0] == '.')
+		(ft_free2(data->pi, data->c - 1), ft_free(cmd),
+			perror("execve Error: line 22"), exit(1));
 	if (ft_check(cmd[0]) == 0)
 		pathname = ft_path(cmd[0], env);
 	else

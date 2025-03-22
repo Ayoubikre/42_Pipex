@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 15:09:04 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:16:53 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	ft_free(char **t)
 	int	i;
 
 	i = 0;
+	if (!t)
+		return ;
 	while (t[i])
 	{
 		free(t[i]);
@@ -114,6 +116,8 @@ void	ft_free2(int **t, int c)
 	int	i;
 
 	i = 0;
+	if (!t)
+		return ;
 	while (i < c)
 	{
 		free(t[i]);
