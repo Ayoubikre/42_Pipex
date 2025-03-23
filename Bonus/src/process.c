@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:17:47 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 23:10:21 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/23 12:40:09 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,27 @@
 void	ft_process(int c, char **ar, char **env, t_list2 *data)
 {
 	pid_t	pid;
-	int		i;
 
 	while (data->i < data->c)
 	{
-		i = data->i;
 		pid = fork();
 		if (pid < 0)
 			(unlink(ar[c - 1]), perror("process Error: line 25"), exit(1));
 		if (pid == 0)
 		{
-			if (data->i == 0 && data->fd1 == -1)
+			if ((data->i == 0 && data->fd1 == -1) || (data->i == data->c - 1
+					&& data->fd2 == -1))
 				(ft_close(data), ft_free2(data->pi, data->c - 1), exit(1));
 			(ft_dup(data), ft_close(data));
 			if (data->f == 1)
-				ft_execve(ar[i + 3], env, data);
+				ft_execve(ar[data->i + 3], env, data);
 			else
-				ft_execve(ar[i + 2], env, data);
+				ft_execve(ar[data->i + 2], env, data);
 		}
-		if (i > 0)
-			close(data->pi[i - 1][0]);
-		if (i < data->c - 1)
-			close(data->pi[i][1]);
+		if (data->i > 0)
+			close(data->pi[data->i - 1][0]);
+		if (data->i < data->c - 1)
+			close(data->pi[data->i][1]);
 		data->i += 1;
 	}
 }

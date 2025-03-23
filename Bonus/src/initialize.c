@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:58:22 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/22 23:10:59 by noctis           ###   ########.fr       */
+/*   Updated: 2025/03/23 12:34:13 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_open(char *t, int f)
 	else
 		fd = open(t, O_RDWR);
 	if (fd == -1)
-		(perror("initialze Error: line 58"), exit(1));
+		perror("initialze Error: line 58");
 	return (fd);
 }
 
